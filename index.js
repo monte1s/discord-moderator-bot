@@ -41,7 +41,7 @@ const profileKeywords = [
 const MIN_MATCHES = 2;
 
 // Channels to monitor (by name)
-const MONITORED_CHANNELS = ['969872347362381864'];
+const MONITORED_CHANNELS = ['969872347362381864', "1337396059453915136", '978116056264613908', '1250839676068036789', '989419845332373534'];
 // Warning channel ID
 const WARNING_CHANNEL_ID = '1001541723702448128'; // Replace with your actual warning channel ID
 
