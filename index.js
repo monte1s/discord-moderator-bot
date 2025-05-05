@@ -36,30 +36,64 @@ const profileKeywords = [
 const MIN_MATCHES = 2;
 
 // Channels to monitor (by name)
-const MONITORED_CHANNELS = ['general'];
+const MONITORED_CHANNELS = ['969872347362381864'];
+// Warning channel ID
+const WARNING_CHANNEL_ID = '1001541723702448128'; // Replace with your actual warning channel ID
 
 client.on('messageCreate', async (message) => {
   // Ignore bot messages and DMs
   if (message.author.bot || !message.guild) return;
 
   // Only monitor specific channels
-  if (!MONITORED_CHANNELS.includes(message.channel.name)) return;
+  if (!MONITORED_CHANNELS.includes(message.channelId)) return;
 
   // Count keyword matches
   const content = message.content.toLowerCase();
   let matchCount = 0;
   for (const keyword of profileKeywords) {
-    if (content.toLowerCase().includes(keyword)) matchCount++;
+    if (content.includes(keyword)) matchCount++;
   }
 
   if (matchCount >= MIN_MATCHES) {
     try {
       await message.delete();
-      await message.channel.send(
-        `${message.author}, please share your profile in the #introduce or #jobs channel instead of #general.`
-      );
+      const warningChannel = await message.guild.channels.fetch(WARNING_CHANNEL_ID);
+      if (warningChannel) {
+        const warningEmbed = {
+          color: 0xFF0000, // Red color
+          title: '⚠️ Profile Share Warning',
+          description: 'Please share your profile in <#970485590707564545> or <#970486424002519150> channel instead of <#969872347362381864>',
+          fields: [
+            {
+              name: 'User',
+              value: `${message.author.tag}`
+            },
+            {
+              name: 'Channel',
+              value: `<#${message.channelId}>`
+            },
+            {
+              name: 'Content',
+              value: message.content.length > 1024 ? message.content.substring(0, 1021) + '...' : message.content
+            },
+            {
+              name: 'Time',
+              value: `<t:${Math.floor(message.createdTimestamp / 1000)}:F>`
+            }
+          ],
+          timestamp: new Date(),
+          footer: {
+            text: `User ID: ${message.author.id}`
+          }
+        };
+
+        await warningChannel.send({ 
+          content: `Profile share detected from ${message.author}`,
+          embeds: [warningEmbed] 
+        });
+      }
     } catch (err) {
-      console.error('Failed to delete message:', err);
+      console.error('Failed to handle message:', err);
     }
   }
 });

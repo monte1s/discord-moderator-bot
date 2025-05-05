@@ -4,10 +4,14 @@
   "description": "A Discord bot to moderate profile sharing in specific channels",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
-} 
+}
