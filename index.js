@@ -12,6 +12,7 @@ const client = new Client({
 
 // List of keywords/phrases that indicate a profile share
 const profileKeywords = [
+  'i am',
   'full stack developer',
   'years experience',
   'looking for',
@@ -29,7 +30,11 @@ const profileKeywords = [
   'available for work',
   'hiring',
   'if you are interested',
-  'looking to'
+  'looking to',
+  'message me',
+  'dm',
+  'if interested',
+  'seeking'
 ];
 
 // Minimum number of keyword matches to trigger deletion
