@@ -27,5 +27,5 @@ A powerful and customizable Discord bot built using **Node.js**. Easily manage y
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-bot-name.git
-cd your-bot-name
+git clone [https://github.com/yourusername/your-bot-name.git](https://github.com/monte1s/discord-moderator-bot)
+cd Discord Moderator Bot
